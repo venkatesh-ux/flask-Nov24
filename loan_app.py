@@ -4,7 +4,7 @@ import pickle
 app = Flask(__name__)
 
 # model loading
-model_file = open("classifier (1).pkl", "rb")
+model_file = open("classifier.pkl", "rb")
 model = pickle.load(model_file)
 
 # model.predict(inputs)
