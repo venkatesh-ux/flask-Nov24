@@ -21,7 +21,7 @@ def predict():
         # use method and predict
 
         loan_req = request.get_json()
-        print(loan_req)
+        print()
         
         if loan_req['Gender'] == "Male":
             Gender =0
@@ -33,15 +33,9 @@ def predict():
         else:
             Married = 1
 
-        if loan_req['Credit_History'] == "Unclear Debts":
-            Credit_History = 0
-        else:
-            Credit_History = 1
-
-
         ApplicationIncome = loan_req['ApplicationIncome']
-        LoanAmount = loan_req['LoanAmount'] / 1000
-        #Credit_History = loan_req['Credit_History']
+        LoanAmount = loan_req['LoanAmount']
+        Credit_History = loan_req['Credit_History']
  
         result = model.predict([[Gender,Married,ApplicationIncome,LoanAmount,Credit_History]])
 
@@ -51,18 +45,8 @@ def predict():
         else:
             pred = "Approved"
 
-        result = {
-            'loan_approval_status': pred
-        }
-
-        return jsonify(result)
-
-
-@app.route('/ping', methods=['GET'])
-def ping():
-    return "Pinging Model!!"
-    #     return {"loan_approval_status":pred}  
-    # else:
-    #     return "I will make the predictions"      
+        return {"loan_approval_status":pred}  
+    else:
+        return "I will make the predictions"      
 
      
